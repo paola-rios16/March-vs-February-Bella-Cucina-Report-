@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Cucina — March 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#FAFAF8;--surface:#FFFFFF;--surface-hover:#F6F5F3;--ink:#1A1A1A;--ink2:#3D3D3D;--muted:#9A9A94;--faint:#E8E6E1;--border:#ECEAE5;--olive:#4A5D2A;--olive-light:#E9EFD9;--terra:#B8452E;--terra-light:#F5E3DD;--gold:#A07D2E;--gold-light:#F5EDDA;--sage:#3D7A4A;--sage-light:#DBF0E0;--radius:16px;--radius-sm:10px;--transition:.35s cubic-bezier(.25,.46,.45,.94)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:56px;-webkit-font-smoothing:antialiased}
+body{font-family:'Outfit',sans-serif;font-weight:300;color:var(--ink2);background:var(--bg);line-height:1.65;overflow-x:hidden}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.08s}.reveal-delay-2{transition-delay:.16s}.reveal-delay-3{transition-delay:.24s}.reveal-delay-4{transition-delay:.32s}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,250,248,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;padding:0 32px;height:52px;gap:4px}
+.nav-brand{font-family:'Newsreader',serif;font-weight:400;font-size:17px;color:var(--ink);letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+.nav-link{font-size:12.5px;font-weight:400;color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:100px;transition:all .25s}
+.nav-link:hover{color:var(--ink)}.nav-link.active{color:var(--ink);background:rgba(0,0,0,.05)}
+
+.page{max-width:980px;margin:0 auto;padding:0 32px}
+section{padding:100px 0 40px}
+.section-eyebrow{font-size:13px;font-weight:500;color:var(--olive);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.section-headline{font-family:'Newsreader',serif;font-weight:300;font-size:clamp(32px,4.5vw,48px);color:var(--ink);line-height:1.12;letter-spacing:-.025em;margin-bottom:8px}
+.section-sub{font-size:16px;color:var(--muted);font-weight:300;max-width:560px;line-height:1.55}
+
+.hero{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:52px;position:relative}
+.hero::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(74,93,42,.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{font-size:13px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--olive);margin-bottom:20px;opacity:0;animation:fadeIn .8s .2s ease forwards}
+.hero h1{font-family:'Newsreader',serif;font-weight:300;font-size:clamp(52px,8vw,88px);color:var(--ink);line-height:1.0;letter-spacing:-.04em;opacity:0;animation:fadeIn .8s .35s ease forwards}
+.hero h1 em{font-style:italic;font-weight:300;color:var(--olive)}
+.hero-meta{font-size:15px;color:var(--muted);font-weight:300;margin-top:16px;opacity:0;animation:fadeIn .8s .5s ease forwards}
+.hero-author{font-size:13px;color:var(--muted);font-weight:400;margin-top:8px;opacity:0;animation:fadeIn .8s .6s ease forwards;letter-spacing:.02em}
+.hero-divider{width:40px;height:1px;background:var(--faint);margin:24px auto 0;opacity:0;animation:fadeIn .8s .7s ease forwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.kpi-item{background:var(--surface);padding:28px 16px;text-align:center;transition:background var(--transition)}.kpi-item:hover{background:var(--surface-hover)}
+.kpi-number{font-family:'Newsreader',serif;font-weight:400;font-size:32px;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.kpi-label{font-size:11.5px;font-weight:400;color:var(--muted);margin-top:6px}
+.kpi-vs{font-size:11px;color:var(--muted);margin-top:4px;font-weight:300}
+.kpi-badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 10px;border-radius:100px;margin-top:6px}
+.badge-up{background:var(--sage-light);color:var(--sage)}.badge-down{background:var(--terra-light);color:var(--terra)}
+
+.g-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 1px 3px rgba(0,0,0,.04);transition:box-shadow var(--transition),transform var(--transition)}
+.g-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-2px)}
+.g-card-pad{padding:32px}
+.g-card-title{font-family:'Newsreader',serif;font-weight:400;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+.g-card-sub{font-size:13px;color:var(--muted);font-weight:300;margin-top:2px;margin-bottom:24px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* Campaign cards */
+.campaign-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.c-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;cursor:pointer;transition:all var(--transition);position:relative;overflow:hidden}
+.c-card::after{content:'→';position:absolute;top:24px;right:24px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg);color:var(--muted);font-size:14px;transition:all var(--transition)}
+.c-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1);transform:translateY(-3px);border-color:var(--olive-light)}.c-card:hover::after{background:var(--olive);color:#fff}
+.c-date{font-size:12px;color:var(--muted);margin-bottom:6px}.c-name{font-family:'Newsreader',serif;font-weight:400;font-size:19px;color:var(--ink);line-height:1.25;margin-bottom:16px;padding-right:40px}
+.c-revenue{font-family:'Newsreader',serif;font-size:30px;font-weight:300;color:var(--olive);letter-spacing:-.02em}.c-orders{font-size:13px;color:var(--muted);margin-top:2px;margin-bottom:16px}
+.c-meta-row{display:flex;gap:20px;border-top:1px solid var(--border);padding-top:14px}.c-meta{font-size:13px;color:var(--ink2);font-weight:400}.c-meta small{display:block;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:400}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.3);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
+.modal-bg.open{display:flex}
+.modal-panel{background:var(--surface);border-radius:20px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.08);animation:modalSlide .35s cubic-bezier(.16,1,.3,1);position:relative}
+@keyframes modalSlide{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{padding:32px 32px 0}.modal-header h2{font-family:'Newsreader',serif;font-weight:400;font-size:26px;color:var(--ink);letter-spacing:-.015em;padding-right:40px}.modal-header .m-date{font-size:13px;color:var(--muted);margin-top:4px}
+.modal-body{padding:24px 32px 32px}
+.modal-close{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;font-size:16px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .2s}.modal-close:hover{background:var(--ink);color:#fff}
+.m-kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}.m-kpi{background:var(--bg);border-radius:var(--radius-sm);padding:16px;text-align:center}.m-kpi .val{font-family:'Newsreader',serif;font-size:24px;font-weight:400;color:var(--ink)}.m-kpi .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.m-insight{background:var(--olive-light);border-radius:var(--radius-sm);padding:16px 20px;font-size:13.5px;color:var(--olive);line-height:1.55;margin-bottom:24px}
+.m-section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.m-order{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--ink2)}.m-order:last-of-type{border-bottom:none}.m-order a{font-size:12px;color:var(--olive);text-decoration:none;font-weight:500}.m-order a:hover{text-decoration:underline}
+.btn-preview{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:12px 24px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:400;margin-top:16px;transition:background .25s}.btn-preview:hover{background:var(--olive)}
+
+/* IG */
+.ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ig-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:all var(--transition)}.ig-item:hover{box-shadow:0 4px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+.ig-pill{display:inline-block;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:100px;margin-bottom:10px}
+.ig-pill.image{background:var(--olive-light);color:var(--olive)}.ig-pill.carousel{background:var(--gold-light);color:var(--gold)}.ig-pill.video{background:var(--sage-light);color:var(--sage)}
+.ig-item .ig-date{font-size:11px;color:var(--muted);margin-bottom:6px}.ig-item .ig-cap{font-size:13.5px;color:var(--ink);line-height:1.4;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ig-item .ig-er{font-family:'Newsreader',serif;font-size:28px;font-weight:300;color:var(--olive);letter-spacing:-.02em}.ig-item .ig-er-label{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
+.ig-item .ig-stats{display:flex;gap:14px;flex-wrap:wrap}.ig-item .ig-stat{font-size:13px;font-weight:400;color:var(--ink2)}.ig-item .ig-stat small{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+
+/* Segment bars */
+.seg-list{display:flex;flex-direction:column;gap:16px}.seg-row{display:grid;grid-template-columns:200px 1fr 80px;align-items:center;gap:16px}
+.seg-name{font-size:13.5px;color:var(--ink2)}.seg-track{height:8px;background:var(--bg);border-radius:100px;overflow:hidden}.seg-fill{height:100%;border-radius:100px;width:0;transition:width 1s cubic-bezier(.16,1,.3,1)}.seg-count{font-size:14px;font-weight:400;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* Comparison card */
+.comp-toggle{width:100%;display:flex;align-items:center;gap:10px;background:none;border:none;padding:0;cursor:pointer;font-family:'Newsreader',serif;font-weight:400;font-size:22px;color:var(--ink);letter-spacing:-.01em;text-align:left}
+.comp-toggle .comp-chevron{font-size:12px;color:var(--muted);transition:transform .3s;margin-left:8px}.comp-toggle.open .comp-chevron{transform:rotate(90deg)}
+.comp-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,1,.3,1)}.comp-body.open{max-height:600px}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-top:20px}
+.comp-cell{background:var(--surface);padding:16px;text-align:center}
+.comp-cell .comp-label{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.comp-cell .comp-val{font-family:'Newsreader',serif;font-size:20px;font-weight:400;color:var(--ink);letter-spacing:-.01em}
+.comp-cell .comp-val.mar{color:var(--olive)}
+.comp-cell .comp-head{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.comp-cell .comp-head.mar-head{color:var(--olive);font-weight:600}
+
+/* Accordion */
+.accordion-btn{width:100%;display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 24px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:400;color:var(--ink);cursor:pointer;transition:all .25s;margin-bottom:8px}
+.accordion-btn:hover{border-color:var(--olive-light);box-shadow:0 1px 3px rgba(0,0,0,.04)}.accordion-btn .chevron{font-size:11px;color:var(--muted);transition:transform .3s;margin-left:auto}.accordion-btn.open .chevron{transform:rotate(90deg)}
+.accordion-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}.accordion-body.open{max-height:12000px}
+
+/* Table */
+.dtable{width:100%;border-collapse:collapse;font-size:13px}.dtable th{text-align:left;padding:10px 14px;font-size:10.5px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0}
+.dtable td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--ink2)}.dtable tr:last-child td{border-bottom:none}.dtable tr:hover td{background:var(--bg)}
+.tag-resend{font-size:10px;font-weight:500;background:var(--gold-light);color:var(--gold);padding:2px 8px;border-radius:100px}
+
+footer{text-align:center;padding:60px 32px 40px;font-size:12px;color:var(--muted)}.f-line{width:40px;height:1px;background:var(--faint);margin:0 auto 16px}
+
+@media(max-width:860px){.kpi-strip{grid-template-columns:repeat(3,1fr)}.grid-2,.campaign-list{grid-template-columns:1fr}.ig-grid{grid-template-columns:repeat(2,1fr)}section{padding:72px 0 32px}.hero{min-height:55vh}.comp-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.kpi-strip{grid-template-columns:repeat(2,1fr)}.ig-grid{grid-template-columns:1fr}.seg-row{grid-template-columns:1fr;gap:4px}.nav-inner,.page{padding:0 16px}.m-kpi-row{grid-template-columns:1fr 1fr}.comp-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <a href="#" class="nav-brand">Bella Cucina</a>
+  <a href="#overview" class="nav-link active" data-nav>Overview</a>
+  <a href="#email" class="nav-link" data-nav>Email</a>
+  <a href="#campaigns" class="nav-link" data-nav>Campaigns</a>
+  <a href="#instagram" class="nav-link" data-nav>Instagram</a>
+  <a href="#audience" class="nav-link" data-nav>Audience</a>
+  <a href="#data" class="nav-link" data-nav>Data</a>
+</div></nav>
+
+<!-- HERO -->
+<div class="hero"><div class="hero-content">
+  <div class="hero-eyebrow">Digital Marketing Report</div>
+  <h1>March <em>2026</em></h1>
+  <div class="hero-meta">March 1–31 vs February 1–28</div>
+  <div class="hero-author">by Paola Rios</div>
+  <div class="hero-divider"></div>
+</div></div>
+
+<!-- KPIs -->
+<section id="overview"><div class="page">
+  <div class="kpi-strip reveal">
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="1349" data-prefix="$">$0</div>
+      <div class="kpi-label">Email Revenue</div>
+      <div class="kpi-vs">vs $1,395 Feb</div>
+      <div class="kpi-badge badge-down">↓ 3.3%</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="14">0</div>
+      <div class="kpi-label">Email Orders</div>
+      <div class="kpi-vs">vs 5 in Feb</div>
+      <div class="kpi-badge badge-up">↑ 180%</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="17.6" data-suffix="%" data-dec="1">0%</div>
+      <div class="kpi-label">Avg Open Rate</div>
+      <div class="kpi-vs">vs 21.8% Feb</div>
+      <div class="kpi-badge badge-down">↓ 18.5%</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="22">0</div>
+      <div class="kpi-label">Campaigns Sent</div>
+      <div class="kpi-vs">vs 19 in Feb</div>
+      <div class="kpi-badge badge-up">↑ 15.8%</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="15097">0</div>
+      <div class="kpi-label">IG Followers</div>
+      <div class="kpi-vs">vs 15,012 Feb</div>
+      <div class="kpi-badge badge-up">+85</div>
+    </div>
+    <div class="kpi-item">
+      <div class="kpi-number" data-count="34">0</div>
+      <div class="kpi-label">Posts + Reels</div>
+      <div class="kpi-vs">vs 12 in Feb</div>
+      <div class="kpi-badge badge-up">↑ 183%</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- EMAIL: Revenue + Open Rates combined -->
+<section id="email"><div class="page">
+  <div class="section-eyebrow reveal">Email Performance</div>
+  <div class="section-headline reveal">Revenue by Campaign<br>& Open Rates</div>
+  <div class="section-sub reveal" style="margin-bottom:40px">14 orders across 7 campaigns — a healthier distribution than February's single-sale dependency.</div>
+  <div class="g-card reveal" style="margin-bottom:24px">
+    <div class="g-card-pad">
+      <div class="g-card-title">Campaign Revenue</div>
+      <div class="g-card-sub">Top 7 campaigns — sorted by revenue</div>
+      <div style="height:300px"><canvas id="revenueChart"></canvas></div>
+    </div>
+  </div>
+  <div class="g-card reveal reveal-delay-1">
+    <div class="g-card-pad">
+      <div class="g-card-title">Open Rates by Campaign</div>
+      <div class="g-card-sub">Main sends only (re-sends excluded) — industry avg ≈ 22%</div>
+      <div style="height:240px"><canvas id="openRateChart"></canvas></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- CAMPAIGNS (moved up, right after email) -->
+<section id="campaigns"><div class="page">
+  <div class="section-eyebrow reveal">Campaign Details</div>
+  <div class="section-headline reveal">Top Performers</div>
+  <div class="section-sub reveal" style="margin-bottom:40px">Tap any card for order details, Shopify links, and email previews.</div>
+  <div class="campaign-list" id="campaignList"></div>
+</div></section>
+
+<!-- INSTAGRAM -->
+<section id="instagram"><div class="page">
+  <div class="section-eyebrow reveal">Instagram</div>
+  <div class="section-headline reveal">Growth & Content</div>
+  <div class="section-sub reveal" style="margin-bottom:40px">+85 followers in March. 34 posts — up 183% from February's 12.</div>
+  <div class="g-card reveal" style="margin-bottom:32px"><div class="g-card-pad"><div class="g-card-title">Follower Growth</div><div class="g-card-sub">Daily — March (solid) vs February (dashed)</div><div style="height:240px"><canvas id="followerChart"></canvas></div></div></div>
+  <div class="ig-grid" id="igGrid"></div>
+</div></section>
+
+<!-- AUDIENCE -->
+<section id="audience"><div class="page">
+  <div class="section-eyebrow reveal">Mailing List</div>
+  <div class="section-headline reveal">Audience Segments</div>
+  <div class="section-sub reveal" style="margin-bottom:40px">53,023 total subscribers — 73% cold. Active audience ≈ 14,000.</div>
+  <div class="grid-2">
+    <div class="g-card reveal"><div class="g-card-pad"><div class="g-card-title">Segment Breakdown</div><div class="g-card-sub">Flodesk snapshot — April 6, 2026</div><div style="height:300px"><canvas id="donutChart"></canvas></div></div></div>
+    <div class="g-card reveal reveal-delay-1"><div class="g-card-pad"><div class="g-card-title">Segment Sizes</div><div class="g-card-sub">Proportional to largest segment</div><div class="seg-list" id="segBars"></div></div></div>
+  </div>
+
+  <!-- Feb vs March Comparison Card -->
+  <div class="g-card reveal" style="margin-top:20px">
+    <div class="g-card-pad">
+      <button class="comp-toggle" onclick="toggleComp(this)">
+        February vs March — At a Glance
+        <span class="comp-chevron">▶</span>
+      </button>
+      <div class="comp-body" id="compBody">
+        <div class="comp-grid">
+          <!-- Header row -->
+          <div class="comp-cell"><div class="comp-head">Metric</div></div>
+          <div class="comp-cell"><div class="comp-head">February</div></div>
+          <div class="comp-cell"><div class="comp-head mar-head">March</div></div>
+          <!-- Campaigns -->
+          <div class="comp-cell"><div class="comp-label">Campaigns</div></div>
+          <div class="comp-cell"><div class="comp-val">19</div></div>
+          <div class="comp-cell"><div class="comp-val mar">22</div></div>
+          <!-- Total Sends -->
+          <div class="comp-cell"><div class="comp-label">Total Sends</div></div>
+          <div class="comp-cell"><div class="comp-val">315,395</div></div>
+          <div class="comp-cell"><div class="comp-val mar">366,404</div></div>
+          <!-- Avg Open Rate -->
+          <div class="comp-cell"><div class="comp-label">Avg Open Rate</div></div>
+          <div class="comp-cell"><div class="comp-val">21.8%</div></div>
+          <div class="comp-cell"><div class="comp-val mar">17.6%</div></div>
+          <!-- Total Clicks -->
+          <div class="comp-cell"><div class="comp-label">Total Clicks</div></div>
+          <div class="comp-cell"><div class="comp-val">2,902</div></div>
+          <div class="comp-cell"><div class="comp-val mar">5,437</div></div>
+          <!-- Unsubscribes -->
+          <div class="comp-cell"><div class="comp-label">Unsubscribes</div></div>
+          <div class="comp-cell"><div class="comp-val">221</div></div>
+          <div class="comp-cell"><div class="comp-val mar">189</div></div>
+          <!-- Revenue -->
+          <div class="comp-cell"><div class="comp-label">Revenue</div></div>
+          <div class="comp-cell"><div class="comp-val">$1,395</div></div>
+          <div class="comp-cell"><div class="comp-val mar">$1,349</div></div>
+          <!-- Orders -->
+          <div class="comp-cell"><div class="comp-label">Orders</div></div>
+          <div class="comp-cell"><div class="comp-val">5</div></div>
+          <div class="comp-cell"><div class="comp-val mar">14</div></div>
+          <!-- Avg Order Value -->
+          <div class="comp-cell"><div class="comp-label">Avg Order Value</div></div>
+          <div class="comp-cell"><div class="comp-val">$278.96</div></div>
+          <div class="comp-cell"><div class="comp-val mar">$96.37</div></div>
+          <!-- IG Posts -->
+          <div class="comp-cell"><div class="comp-label">IG Posts + Reels</div></div>
+          <div class="comp-cell"><div class="comp-val">12</div></div>
+          <div class="comp-cell"><div class="comp-val mar">34</div></div>
+          <!-- IG Followers -->
+          <div class="comp-cell"><div class="comp-label">IG Followers (end)</div></div>
+          <div class="comp-cell"><div class="comp-val">15,012</div></div>
+          <div class="comp-cell"><div class="comp-val mar">15,097</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- RAW DATA -->
+<section id="data"><div class="page">
+  <div class="section-eyebrow reveal">Reference</div>
+  <div class="section-headline reveal">Raw Data</div>
+  <div class="section-sub reveal" style="margin-bottom:40px">Full tables — campaigns, orders, and Instagram posts.</div>
+  <div class="reveal"><button class="accordion-btn" onclick="toggleAccordion(this)">All 22 Email Campaigns<span class="chevron">▶</span></button><div class="accordion-body"><div class="g-card" style="margin-bottom:16px;overflow-x:auto;border-radius:0 0 var(--radius) var(--radius)"><table class="dtable" id="tblCampaigns"></table></div></div></div>
+  <div class="reveal reveal-delay-1"><button class="accordion-btn" onclick="toggleAccordion(this)">All 14 Sales Orders — $1,349.24<span class="chevron">▶</span></button><div class="accordion-body"><div class="g-card" style="margin-bottom:16px;overflow-x:auto;border-radius:0 0 var(--radius) var(--radius)"><table class="dtable" id="tblOrders"></table></div></div></div>
+  <div class="reveal reveal-delay-2"><button class="accordion-btn" onclick="toggleAccordion(this)">All 23 Instagram Posts<span class="chevron">▶</span></button><div class="accordion-body"><div class="g-card" style="margin-bottom:16px;overflow-x:auto;border-radius:0 0 var(--radius) var(--radius)"><table class="dtable" id="tblIG"></table></div></div></div>
+</div></section>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()"><div class="modal-panel" id="modalPanel"></div></div>
+
+<footer><div class="f-line"></div>Bella Cucina — March 2026 Digital Report<br><span style="color:var(--muted)">Prepared by Paola Rios, Digital Marketing Manager</span></footer>
+
+<script>
+const SH='https://admin.shopify.com/store/bellacucinashop/orders/';
+const campaigns=[
+{name:'Retail Global: Product Feature',date:'Mar 11',revenue:348.70,orders:3,openRate:'23.2%',clicks:394,sent:22161,orderList:[{id:'8948',amt:'$187.00'},{id:'8939',amt:'$97.90'},{id:'8938',amt:'$63.80'}],flodesk:'https://view.flodesk.com/emails/69a86c8d90e39b6e1fb3cf3f',insight:'Highest revenue campaign — product-focused emails convert well across multiple price points.'},
+{name:'Weekly Recipe: Meyer Lemon Sweet Sformato',date:'Mar 3',revenue:277.50,orders:3,openRate:'23.0%',clicks:317,sent:22219,orderList:[{id:'8831',amt:'$31.90'},{id:'8829',amt:'$103.95'},{id:'8964',amt:'$141.65'}],flodesk:'https://view.flodesk.com/emails/69a076fe8cfc7b2c874034f1',insight:'Recipe emails consistently generate multi-order conversions. Third order came from the citrus re-send.'},
+{name:'Vintage Vault: Denim',date:'Mar 13',revenue:202.30,orders:1,openRate:'22.9%',clicks:280,sent:22138,orderList:[{id:'9041',amt:'$202.30'}],flodesk:'https://view.flodesk.com/emails/69b1b991f5a996443e55cb84',insight:'Single high-value order attributed to the re-send. Curated lifestyle content drives premium purchases.'},
+{name:'Classes: Pizza Making (Mar 12)',date:'Mar 12',revenue:170.00,orders:1,openRate:'25.3%',clicks:322,sent:13708,orderList:[{id:'8951',amt:'$170.00'}],flodesk:'https://view.flodesk.com/emails/69b1e369f7ced667c064ad77',insight:'Highest open rate of the month — class emails sent to a smaller, engaged segment perform well.'},
+{name:'Weekly Recipe: Smoked Salmon Torta',date:'Mar 17',revenue:95.95,orders:1,openRate:'23.0%',clicks:320,sent:22105,orderList:[{id:'9043',amt:'$95.95'}],flodesk:'https://view.flodesk.com/emails/69b1d449d5139500626714c5',insight:'Consistent performer — recipe content maintains strong open rates and steady conversions.'},
+{name:'Monthly Journal: March',date:'Mar 2',revenue:85.00,orders:2,openRate:'22.6%',clicks:414,sent:22230,orderList:[{id:'8821',amt:'$40.00'},{id:'9174',amt:'$45.00'}],flodesk:'https://view.flodesk.com/emails/699f5d026d3aa19524b10096',insight:'Re-send on Mar 23 generated a second order. The journal format nurtures long-tail conversions.'},
+{name:'Classes: Pizza Making (Mar 5)',date:'Mar 5',revenue:85.00,orders:1,openRate:'23.7%',clicks:296,sent:13017,orderList:[{id:'8863',amt:'$85.00'}],flodesk:'https://view.flodesk.com/emails/69a89bbf6878592d6470eb12',insight:'Smaller send list (13K vs 22K) but higher engagement and conversion.'}];
+
+const allCampaigns=[
+{date:'Mar 2',name:'Monthly Journal | March pr edit',sent:'22,230',pct:'22.6%',clicks:414,rev:'$40',orders:1,rs:false},
+{date:'Mar 2',name:'Monthly Journal (re-send)',sent:'17,611',pct:'28.4%',clicks:414,rev:'$45',orders:1,rs:true},
+{date:'Mar 3',name:'Weekly Recipe | Meyer Lemon Sweet Sformato',sent:'22,219',pct:'23.0%',clicks:317,rev:'$136',orders:2,rs:false},
+{date:'Mar 3',name:'Weekly Recipe | Meyer Lemon (Wildflower)',sent:'—',pct:'—',clicks:'—',rev:'$104',orders:1,rs:false},
+{date:'Mar 4',name:'Weekly Recipe | Meyer Lemon (re-send)',sent:'17,720',pct:'3.9%',clicks:129,rev:'$0',orders:0,rs:true},
+{date:'Mar 5',name:'Classes: Pizza Making Class',sent:'13,017',pct:'23.7%',clicks:296,rev:'$85',orders:1,rs:false},
+{date:'Mar 5',name:'Classes: Pizza Making Class (re-send)',sent:'13,005',pct:'22.9%',clicks:165,rev:'$0',orders:0,rs:true},
+{date:'Mar 10',name:'Weekly Recipe | Citrus Fennel Sea Bass',sent:'22,170',pct:'13.3%',clicks:121,rev:'$0',orders:0,rs:false},
+{date:'Mar 10',name:'Newsletter sign-up pop up',sent:'—',pct:'—',clicks:'—',rev:'$17',orders:1,rs:false},
+{date:'Mar 11',name:'Retail Global: Product Feature',sent:'22,161',pct:'23.2%',clicks:394,rev:'$349',orders:3,rs:false},
+{date:'Mar 12',name:'Retail Global: Product Feature (re-send)',sent:'17,542',pct:'3.4%',clicks:54,rev:'$0',orders:0,rs:true},
+{date:'Mar 12',name:'Weekly Recipe | Meyer Lemon (citrus re-send)',sent:'—',pct:'—',clicks:394,rev:'$142',orders:1,rs:false},
+{date:'Mar 12',name:'Classes: Pizza Making Class | Mar 12',sent:'13,708',pct:'25.3%',clicks:322,rev:'$170',orders:1,rs:false},
+{date:'Mar 13',name:'Vintage Vault: Denim',sent:'22,138',pct:'22.9%',clicks:280,rev:'$0',orders:0,rs:false},
+{date:'Mar 16',name:'Vintage Vault: Denim (re-send)',sent:'17,446',pct:'2.9%',clicks:47,rev:'$202',orders:1,rs:true},
+{date:'Mar 17',name:'Weekly Recipe | Smoked Salmon Mascarpone Torta',sent:'22,105',pct:'23.0%',clicks:320,rev:'$96',orders:1,rs:false},
+{date:'Mar 18',name:'Weekly Recipe | Salmon Torta (re-send)',sent:'17,639',pct:'4.1%',clicks:207,rev:'$0',orders:0,rs:true},
+{date:'Mar 19',name:'Classes: Pizza Making Class (Mar 19)',sent:'22,139',pct:'20.3%',clicks:392,rev:'$0',orders:0,rs:false},
+{date:'Mar 20',name:'Vintage Vault: Antiques & Objects',sent:'22,067',pct:'23.3%',clicks:485,rev:'$0',orders:0,rs:false},
+{date:'Mar 22',name:'Antiques & Found Objects (re-send)',sent:'17,409',pct:'3.3%',clicks:90,rev:'$0',orders:0,rs:true},
+{date:'Mar 24',name:'Weekly Recipe | Golden Hour Mocktail',sent:'22,044',pct:'20.7%',clicks:306,rev:'$68',orders:1,rs:false},
+{date:'Mar 31',name:'Weekly Recipe | Preserved Lemon Cream Cake',sent:'22,034',pct:'20.2%',clicks:290,rev:'$0',orders:0,rs:false}];
+
+const allOrders=[
+{id:'8821',date:'Mar 2',amt:'$40.00',c:'Monthly Journal | March pr edit'},
+{id:'8831',date:'Mar 3',amt:'$31.90',c:'Weekly Recipe | Meyer Lemon'},
+{id:'8829',date:'Mar 3',amt:'$103.95',c:'Weekly Recipe | Meyer Lemon'},
+{id:'8863',date:'Mar 5',amt:'$85.00',c:'Classes: Pizza Making Class'},
+{id:'8931',date:'Mar 10',amt:'$17.00',c:'Newsletter sign-up pop up'},
+{id:'8948',date:'Mar 11',amt:'$187.00',c:'Retail Global: Product Feature'},
+{id:'8939',date:'Mar 11',amt:'$97.90',c:'Retail Global: Product Feature'},
+{id:'8938',date:'Mar 11',amt:'$63.80',c:'Retail Global: Product Feature'},
+{id:'8964',date:'Mar 12',amt:'$141.65',c:'Weekly Recipe | Meyer Lemon (citrus)'},
+{id:'8951',date:'Mar 12',amt:'$170.00',c:'Classes: Pizza Making | Mar 12'},
+{id:'9041',date:'Mar 16',amt:'$202.30',c:'Vintage Vault: Denim (re-send)'},
+{id:'9043',date:'Mar 17',amt:'$95.95',c:'Weekly Recipe | Smoked Salmon Torta'},
+{id:'9174',date:'Mar 23',amt:'$45.00',c:'Monthly Journal (re-send)'},
+{id:'9185',date:'Mar 24',amt:'$67.79',c:'Weekly Recipe | Golden Hour Mocktail'}];
+
+const igTop=[
+{date:'Mar 30',type:'image',caption:'Poppies at the farmers market',er:'16%',eng:22,reach:140,likes:18},
+{date:'Mar 2',type:'carousel',caption:'PRIMAVERA | at Bella Cucina',er:'11%',eng:20,reach:162,likes:16},
+{date:'Mar 6',type:'video',caption:'Inside the Store × Studio',er:'9.3%',eng:35,reach:418,likes:27},
+{date:'Mar 15',type:'image',caption:'Sunday Slowdown — Marfa / talismans',er:'9.0%',eng:30,reach:333,likes:22},
+{date:'Mar 29',type:'image',caption:'Sunday Slowdown — emptiness',er:'8.7%',eng:11,reach:126,likes:11},
+{date:'Mar 1',type:'image',caption:'Sunday Slowdown — time as sacred currency',er:'8.7%',eng:28,reach:321,likes:26},
+{date:'Mar 11',type:'carousel',caption:'March in Italy — Citrus Fennel Sea Bass',er:'7.9%',eng:18,reach:229,likes:12},
+{date:'Mar 8',type:'image',caption:'Sunday Slowdown — generous hospitality',er:'6.1%',eng:8,reach:132,likes:6}];
+
+const allIG=[
+{date:'Mar 31',type:'carousel',er:'6.1%',eng:13,reach:214,likes:12,caption:'End of month carousel'},
+{date:'Mar 30',type:'image',er:'16%',eng:22,reach:140,likes:18,caption:'Poppies at the farmers market'},
+{date:'Mar 30',type:'image',er:'6.4%',eng:18,reach:326,likes:16,caption:'Weekend market scene'},
+{date:'Mar 29',type:'image',er:'8.7%',eng:11,reach:126,likes:11,caption:'Sunday Slowdown — emptiness'},
+{date:'Mar 26',type:'video',er:'4.1%',eng:12,reach:315,likes:10,caption:'Store walkthrough reel'},
+{date:'Mar 25',type:'video',er:'1.9%',eng:5,reach:263,likes:3,caption:'Spring arrivals reel'},
+{date:'Mar 24',type:'video',er:'1.3%',eng:5,reach:393,likes:4,caption:'Golden hour at Bella Cucina'},
+{date:'Mar 23',type:'video',er:'3.7%',eng:9,reach:243,likes:8,caption:'Kitchen prep reel'},
+{date:'Mar 22',type:'image',er:'6.0%',eng:14,reach:234,likes:11,caption:'Spring table setting'},
+{date:'Mar 20',type:'video',er:'1.6%',eng:6,reach:425,likes:4,caption:'Recipe teaser'},
+{date:'Mar 19',type:'video',er:'2.4%',eng:8,reach:333,likes:7,caption:'New in the shop'},
+{date:'Mar 18',type:'video',er:'5.2%',eng:9,reach:174,likes:6,caption:'Behind the scenes'},
+{date:'Mar 17',type:'carousel',er:'6.9%',eng:16,reach:231,likes:9,caption:'Weekend roundup'},
+{date:'Mar 15',type:'image',er:'9.0%',eng:30,reach:333,likes:22,caption:'Sunday Slowdown — Marfa / talismans'},
+{date:'Mar 12',type:'video',er:'5.1%',eng:13,reach:315,likes:10,caption:'Pizza class highlights'},
+{date:'Mar 11',type:'carousel',er:'7.9%',eng:18,reach:229,likes:12,caption:'March in Italy — Citrus Fennel Sea Bass'},
+{date:'Mar 8',type:'image',er:'6.1%',eng:8,reach:132,likes:6,caption:'Sunday Slowdown — generous hospitality'},
+{date:'Mar 7',type:'carousel',er:'6.4%',eng:11,reach:173,likes:8,caption:'This week at Bella Cucina'},
+{date:'Mar 6',type:'video',er:'9.3%',eng:35,reach:418,likes:27,caption:'Inside the Store × Studio'},
+{date:'Mar 5',type:'video',er:'5.8%',eng:17,reach:309,likes:14,caption:'New product unboxing reel'},
+{date:'Mar 3',type:'carousel',er:'3.1%',eng:8,reach:260,likes:6,caption:'Spring preview carousel'},
+{date:'Mar 2',type:'carousel',er:'11%',eng:20,reach:162,likes:16,caption:'PRIMAVERA | at Bella Cucina'},
+{date:'Mar 1',type:'image',er:'8.7%',eng:28,reach:321,likes:26,caption:'Sunday Slowdown — time as sacred currency'}];
+
+const segments=[
+{name:'Cold (365+ Days)',count:38863,color:'#9A9A94'},
+{name:'Active Engaged',count:13823,color:'#4A5D2A'},
+{name:'Active Buyers',count:1525,color:'#3D7A4A'},
+{name:'New Subscribers',count:1144,color:'#A07D2E'},
+{name:'Lapsed Buyers',count:989,color:'#B8452E'}];
+
+// Scroll Reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+function observeAll(){document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))}
+
+// KPI Counter
+function animateKPIs(){document.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.dataset.count),p=el.dataset.prefix||'',s=el.dataset.suffix||'',d=parseInt(el.dataset.dec)||0,dur=1400,st=performance.now();function tick(n){const prog=Math.min((n-st)/dur,1),ease=1-Math.pow(1-prog,4),v=ease*t;if(p==='$')el.textContent='$'+Math.round(v).toLocaleString();else if(s==='%')el.textContent=v.toFixed(d)+'%';else el.textContent=p+(d?v.toFixed(d):Math.round(v).toLocaleString());if(prog<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)})}
+
+// Charts
+Chart.defaults.font.family="'Outfit',sans-serif";Chart.defaults.font.weight='300';Chart.defaults.font.size=12;Chart.defaults.color='#9A9A94';
+
+function initCharts(){
+new Chart(document.getElementById('revenueChart'),{type:'bar',data:{labels:campaigns.map(c=>c.name.length>28?c.name.slice(0,26)+'…':c.name),datasets:[{data:campaigns.map(c=>c.revenue),backgroundColor:'rgba(74,93,42,.82)',borderRadius:6,barThickness:22}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.raw.toFixed(2)}}},scales:{x:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{callback:v=>'$'+v}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+
+const ms=allCampaigns.filter(c=>!c.rs&&c.pct!=='—');
+new Chart(document.getElementById('openRateChart'),{type:'bar',data:{labels:ms.map(c=>c.date),datasets:[{data:ms.map(c=>parseFloat(c.pct)),backgroundColor:ms.map(c=>parseFloat(c.pct)>=22?'rgba(74,93,42,.75)':parseFloat(c.pct)>=20?'rgba(160,125,46,.6)':'rgba(184,69,46,.6)'),borderRadius:4,barThickness:16}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw+'%'}}},scales:{y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{callback:v=>v+'%'},min:0,max:28},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+const mF=[15030,15033,15036,15029,15036,15036,15037,15038,15036,15034,15038,15042,15044,15050,15052,15053,15052,15051,15054,15055,15059,15059,15058,15058,15059,15059,15063,15085,15093,15095,15091];
+const fF=[14901,14904,null,null,null,null,null,null,null,14913,14913,14915,14920,14923,14934,14935,14937,14939,14942,14942,14936,14936,14959,14960,14961,14961,14964,15012,null,null,null];
+new Chart(document.getElementById('followerChart'),{type:'line',data:{labels:Array.from({length:31},(_,i)=>(i+1)),datasets:[{label:'March',data:mF,borderColor:'#4A5D2A',backgroundColor:'rgba(74,93,42,.06)',fill:true,tension:.35,pointRadius:0,pointHoverRadius:4,borderWidth:2.5},{label:'February',data:fF,borderColor:'#9A9A94',borderDash:[5,4],fill:false,tension:.35,pointRadius:0,pointHoverRadius:4,borderWidth:1.5,spanGaps:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',align:'end',labels:{boxWidth:14,boxHeight:2,padding:16}}},scales:{y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{callback:v=>v.toLocaleString()},min:14880},x:{grid:{display:false},ticks:{maxTicksLimit:8}}}}});
+
+new Chart(document.getElementById('donutChart'),{type:'doughnut',data:{labels:segments.map(s=>s.name),datasets:[{data:segments.map(s=>s.count),backgroundColor:segments.map(s=>s.color),borderWidth:3,borderColor:'#FFFFFF',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'bottom',labels:{padding:14,boxWidth:10,boxHeight:10,usePointStyle:true,pointStyle:'circle',font:{size:11}}},tooltip:{callbacks:{label:c=>' '+c.label+': '+c.raw.toLocaleString()}}}}});
+}
+
+// Campaign Cards + Modal
+function renderCampaigns(){const el=document.getElementById('campaignList');el.innerHTML=campaigns.map((c,i)=>`<div class="c-card reveal reveal-delay-${Math.min(i%4+1,4)}" onclick="openModal(${i})"><div class="c-date">${c.date}</div><div class="c-name">${c.name}</div><div class="c-revenue">$${c.revenue.toFixed(2)}</div><div class="c-orders">${c.orders} order${c.orders!==1?'s':''}</div><div class="c-meta-row"><div class="c-meta">${c.openRate}<small>Open Rate</small></div><div class="c-meta">${c.clicks.toLocaleString()}<small>Clicks</small></div><div class="c-meta">${c.sent.toLocaleString()}<small>Sent</small></div></div></div>`).join('');el.querySelectorAll('.reveal').forEach(r=>obs.observe(r))}
+function openModal(i){const c=campaigns[i];document.getElementById('modalPanel').innerHTML=`<button class="modal-close" onclick="closeModal()">✕</button><div class="modal-header"><h2>${c.name}</h2><div class="m-date">${c.date} · ${c.sent.toLocaleString()} recipients</div></div><div class="modal-body"><div class="m-kpi-row"><div class="m-kpi"><div class="val">$${c.revenue.toFixed(2)}</div><div class="lbl">Revenue</div></div><div class="m-kpi"><div class="val">${c.openRate}</div><div class="lbl">Open Rate</div></div><div class="m-kpi"><div class="val">${c.clicks}</div><div class="lbl">Clicks</div></div></div><div class="m-insight">${c.insight}</div><div class="m-section-label">Orders</div>${c.orderList.map(o=>`<div class="m-order"><span>#${o.id} — ${o.amt}</span><a href="${SH}${o.id}" target="_blank">Shopify →</a></div>`).join('')}<a class="btn-preview" href="${c.flodesk}" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 4l10 8 10-8"/></svg>View Email</a></div>`;document.getElementById('modalBg').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modalBg').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// IG
+function renderIG(){const el=document.getElementById('igGrid');el.innerHTML=igTop.map((p,i)=>`<div class="ig-item reveal reveal-delay-${Math.min(i%4+1,4)}"><span class="ig-pill ${p.type}">${p.type}</span><div class="ig-date">${p.date}</div><div class="ig-cap">${p.caption}</div><div class="ig-er">${p.er}</div><div class="ig-er-label">Engagement Rate</div><div class="ig-stats"><div class="ig-stat">${p.eng}<small>Engagements</small></div><div class="ig-stat">${p.reach}<small>Reach</small></div><div class="ig-stat">${p.likes}<small>Likes</small></div></div></div>`).join('');el.querySelectorAll('.reveal').forEach(r=>obs.observe(r))}
+
+// Segments
+function renderSegments(){const mx=Math.max(...segments.map(s=>s.count));const el=document.getElementById('segBars');el.innerHTML=segments.map(s=>`<div class="seg-row"><div class="seg-name">${s.name}</div><div class="seg-track"><div class="seg-fill" style="background:${s.color}" data-w="${(s.count/mx*100).toFixed(1)}"></div></div><div class="seg-count">${s.count.toLocaleString()}</div></div>`).join('');setTimeout(()=>{document.querySelectorAll('.seg-fill').forEach(f=>f.style.width=f.dataset.w+'%')},600)}
+
+// Tables
+function renderTables(){
+document.getElementById('tblCampaigns').innerHTML='<thead><tr><th>Date</th><th>Campaign</th><th>Sent</th><th>Open %</th><th>Clicks</th><th>Revenue</th><th>Orders</th><th></th></tr></thead><tbody>'+allCampaigns.map(c=>`<tr><td>${c.date}</td><td>${c.name}</td><td>${c.sent}</td><td>${c.pct}</td><td>${c.clicks}</td><td>${c.rev}</td><td>${c.orders}</td><td>${c.rs?'<span class="tag-resend">Re-send</span>':''}</td></tr>`).join('')+'</tbody>';
+document.getElementById('tblOrders').innerHTML='<thead><tr><th>Order</th><th>Date</th><th>Amount</th><th>Campaign</th><th></th></tr></thead><tbody>'+allOrders.map(o=>`<tr><td>#${o.id}</td><td>${o.date}</td><td>${o.amt}</td><td>${o.c}</td><td><a href="${SH}${o.id}" target="_blank" style="color:var(--olive);font-size:12px;text-decoration:none;font-weight:500">Shopify →</a></td></tr>`).join('')+'</tbody>';
+document.getElementById('tblIG').innerHTML='<thead><tr><th>Date</th><th>Type</th><th>Caption</th><th>Eng Rate</th><th>Engagements</th><th>Reach</th><th>Likes</th></tr></thead><tbody>'+allIG.map(p=>`<tr><td>${p.date}</td><td><span class="ig-pill ${p.type}" style="font-size:10px;padding:2px 8px">${p.type}</span></td><td>${p.caption}</td><td>${p.er}</td><td>${p.eng}</td><td>${p.reach}</td><td>${p.likes}</td></tr>`).join('')+'</tbody>';
+}
+
+function toggleAccordion(b){b.classList.toggle('open');b.nextElementSibling.classList.toggle('open')}
+function toggleComp(b){b.classList.toggle('open');document.getElementById('compBody').classList.toggle('open')}
+
+// Nav highlight
+function initNav(){const links=document.querySelectorAll('[data-nav]');const navObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+x.target.id))})},{rootMargin:'-60px 0px -55% 0px'});links.forEach(l=>{const s=document.querySelector(l.getAttribute('href'));if(s)navObs.observe(s)})}
+
+document.addEventListener('DOMContentLoaded',()=>{animateKPIs();initCharts();renderCampaigns();renderIG();renderSegments();renderTables();observeAll();initNav()});
+</script>
+</body>
+</html>

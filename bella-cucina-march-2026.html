@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Cucina — March 2026 Digital Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#F7F4EF;--white:#FDFCFA;--ink:#17171A;--ink2:#38383A;--muted:#8C8C88;--border:#E2DDD6;--olive:#3E4F22;--olive-m:#6B7A40;--olive-p:#EAF0D4;--terra:#A04028;--terra-p:#F0E0D8;--gold:#9A7020;--gold-p:#F4EDDA;--sage:#4A6E48;--sage-p:#DDE8DC;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6}
+.hdr{background:var(--ink);padding:3rem 5vw 2.5rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem}
+.hdr-ey{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:.75rem}
+.hdr-t{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:300;color:#fff;line-height:1}
+.hdr-t em{font-style:italic;color:rgba(255,255,255,.42);font-size:.56em;display:block;margin-top:.25rem}
+.hdr-r{text-align:right;font-size:11px;color:rgba(255,255,255,.28);line-height:2.1}
+.nav{position:sticky;top:0;z-index:90;background:var(--white);border-bottom:1px solid var(--border);display:flex;padding:0 5vw;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:.9rem 1.2rem;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.nav a:hover{color:var(--ink)}
+.nav a.on{color:var(--olive);border-bottom-color:var(--olive);font-weight:500}
+.kband{background:var(--white);border-bottom:1px solid var(--border);padding:0 5vw}
+.krow{display:grid;grid-template-columns:repeat(6,1fr)}
+.kpi{padding:1.3rem 1rem;border-right:1px solid var(--border)}
+.kpi:last-child{border-right:none}
+.kl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.kv{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--ink);line-height:1;margin-bottom:.3rem}
+.ks{font-size:10px;color:var(--muted);margin-bottom:.3rem}
+.pill{display:inline-flex;align-items:center;font-size:10px;font-weight:500;padding:2px 7px;border-radius:20px}
+.up{background:var(--sage-p);color:var(--sage)}.dn{background:var(--terra-p);color:var(--terra)}.nt{background:var(--gold-p);color:var(--gold)}
+.page{max-width:1080px;margin:0 auto;padding:2.5rem 5vw 6rem}
+section{margin-bottom:3.5rem;scroll-margin-top:100px}
+.sh{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.sh-ey{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive-m);flex-shrink:0}
+.sh-ti{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--ink);flex-shrink:0}
+.sh-r{flex:1;height:1px;background:var(--border)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.g31{display:grid;grid-template-columns:1.9fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+.g13{display:grid;grid-template-columns:1fr 1.9fr;gap:1.25rem;margin-bottom:1.25rem}
+.mb{margin-bottom:1.25rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.4rem;overflow:hidden}
+.cl{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-bottom:.7rem;border-bottom:1px solid var(--border);margin-bottom:1.2rem}
+.ch{position:relative;height:240px}
+.chsm{position:relative;height:200px}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.cc{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.1rem;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s;position:relative}
+.cc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.08);border-color:var(--olive-m)}
+.cc-r{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:300;color:var(--olive);line-height:1;margin-bottom:.25rem}
+.cc-n{font-size:11px;color:var(--ink2);line-height:1.35;margin-bottom:.3rem}
+.cc-m{font-size:10px;color:var(--muted)}
+.cc-b{height:3px;background:var(--border);border-radius:2px;margin-top:.7rem;overflow:hidden}
+.cc-f{height:100%;border-radius:2px;background:var(--olive)}
+.igg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.igc{background:var(--white);border:1px solid var(--border);border-radius:9px;padding:.9rem;cursor:pointer;transition:all .18s}
+.igc:hover{border-color:var(--olive-m);transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.ig-er{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--olive);line-height:1}
+.ig-ty{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:.25rem 0}
+.ig-cp{font-size:10px;color:var(--ink2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ig-re{font-size:10px;color:var(--muted);margin-top:.4rem}
+.sr{display:flex;align-items:center;gap:10px;margin-bottom:.85rem}
+.sl{width:210px;flex-shrink:0;font-size:11px;color:var(--ink2);line-height:1.3}
+.st{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.sf{height:100%;border-radius:4px;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.sv{width:58px;text-align:right;font-size:11px;font-weight:500;flex-shrink:0}
+.orr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.orl{width:185px;flex-shrink:0;font-size:10px;color:var(--ink2);line-height:1.3}
+.ort{flex:1;height:6px;background:var(--border);border-radius:3px;position:relative;overflow:hidden}
+.orf{height:100%;border-radius:3px;transition:width 1s .3s cubic-bezier(.4,0,.2,1)}
+.ora{position:absolute;top:0;height:100%;width:1.5px;background:rgba(160,64,40,.45)}
+.orv{width:34px;text-align:right;font-size:10px;font-weight:500;flex-shrink:0}
+.orr.dim .orl,.orr.dim .orv{color:var(--muted)}
+.cmp{width:100%;border-collapse:collapse;font-size:12px}
+.cmp th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:5px 6px;text-align:right;border-bottom:1px solid var(--border);font-weight:400}
+.cmp th:first-child{text-align:left}
+.cmp td{padding:7px 6px;border-bottom:1px solid var(--border);text-align:right;color:var(--ink)}
+.cmp td:first-child{text-align:left;color:var(--muted);font-size:11px}
+.cmp tr:last-child td{border-bottom:none;font-weight:500}
+.cm{font-weight:500}.cf{color:var(--muted);font-weight:300}
+.rt{display:flex;align-items:center;gap:.75rem;padding:.9rem 1.2rem;background:var(--white);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink2);width:100%;text-align:left;transition:background .15s;margin-bottom:4px;font-family:'DM Sans',sans-serif}
+.rt:hover{background:var(--bg)}
+.rt .cv{margin-left:auto;transition:transform .25s;font-size:10px;color:var(--muted)}
+.rt.open .cv{transform:rotate(180deg)}
+.rb{display:none;overflow-x:auto;background:var(--white);border:1px solid var(--border);border-radius:0 0 10px 10px;margin-bottom:8px}
+.rb.open{display:block}
+.rbt{width:100%;border-collapse:collapse;font-size:11px;min-width:560px}
+.rbt th{background:var(--ink);color:rgba(255,255,255,.6);padding:7px 10px;text-align:left;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:400;cursor:pointer;white-space:nowrap}
+.rbt th:hover{color:#fff}
+.rbt td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--ink2)}
+.rbt tr:nth-child(even) td{background:var(--bg)}
+.rbt tr:hover td{background:var(--olive-p)}
+.tg{color:var(--olive);font-weight:500}.tm{color:var(--muted)}
+.tl{color:var(--olive);text-decoration:none;font-size:10px}
+.tl:hover{text-decoration:underline}
+.note{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--olive-m);border-radius:0 8px 8px 0;padding:.85rem 1.1rem;font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem}
+.note strong{font-weight:500;color:var(--ink)}
+.ov{display:none;position:fixed;inset:0;background:rgba(23,23,26,.65);z-index:200;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(3px)}
+.ov.open{display:flex}
+.mo{background:var(--white);border-radius:16px;max-width:660px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:mu .22s ease}
+@keyframes mu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.mh{padding:1.75rem 1.75rem 1.2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
+.mcl{position:absolute;top:1.2rem;right:1.2rem;width:32px;height:32px;background:var(--bg);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .15s}
+.mcl:hover{background:var(--border);color:var(--ink)}
+.mb2{padding:1.4rem 1.75rem 1.75rem}
+.mt{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:300;color:var(--ink);padding-right:2.5rem;line-height:1.2;margin-bottom:.2rem}
+.ms{font-size:11px;color:var(--muted)}
+.mk{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.9rem 0 1.3rem}
+.mkp{background:var(--bg);border-radius:8px;padding:.8rem;text-align:center}
+.mkv{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:var(--ink);line-height:1}
+.mkl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.msect{margin-bottom:1.2rem}
+.msect-t{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem;padding-bottom:.45rem;border-bottom:1px solid var(--border)}
+.or{display:flex;justify-content:space-between;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:12px}
+.or:last-child{border-bottom:none}
+.oid{color:var(--olive);text-decoration:none;font-weight:500}
+.oid:hover{text-decoration:underline}
+.oam{font-weight:500}
+.mac{display:flex;gap:.65rem;flex-wrap:wrap;padding-top:.75rem;border-top:1px solid var(--border)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:.6rem 1.1rem;border-radius:8px;font-size:12px;font-weight:400;text-decoration:none;cursor:pointer;border:none;transition:opacity .15s;font-family:'DM Sans',sans-serif}
+.btn:hover{opacity:.78}
+.bp{background:var(--olive);color:#fff}
+.bg2{background:var(--gold-p);color:var(--gold);border:1px solid rgba(154,112,32,.2)}
+.bn{background:var(--bg);color:var(--ink2);border:1px solid var(--border)}
+footer{background:var(--ink);color:rgba(255,255,255,.22);text-align:center;padding:1.5rem;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+footer span{color:rgba(255,255,255,.42)}
+@media(max-width:860px){.krow{grid-template-columns:repeat(3,1fr)}.kpi:nth-child(3){border-right:none}.g2,.g31,.g13{grid-template-columns:1fr}.mk{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.krow{grid-template-columns:repeat(2,1fr)}.kpi:nth-child(2){border-right:none}.hdr{padding:2rem 1.5rem}.page{padding:1.5rem 1.5rem 5rem}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div><div class="hdr-ey">Bella Cucina · Digital Marketing</div><div class="hdr-t">March 2026<em>Monthly Report</em></div></div>
+  <div class="hdr-r">Prepared April 7, 2026<br>Paola · Digital Marketing<br>Compared to February 2026</div>
+</header>
+<nav class="nav" id="nav">
+  <a href="#overview" class="on">Overview</a>
+  <a href="#email">Email</a>
+  <a href="#instagram">Instagram</a>
+  <a href="#audience">Mailing List</a>
+  <a href="#data">Raw Data</a>
+</nav>
+<div class="kband"><div class="krow">
+  <div class="kpi"><div class="kl">Email Revenue</div><div class="kv" data-t="1349" data-p="$">$0</div><div class="ks">vs $1,395 Feb</div><span class="pill dn">↓ 3.3%</span></div>
+  <div class="kpi"><div class="kl">Email Orders</div><div class="kv" data-t="14">0</div><div class="ks">vs 5 in Feb</div><span class="pill up">↑ 180%</span></div>
+  <div class="kpi"><div class="kl">Avg Open Rate</div><div class="kv" data-t="17.6" data-s="%">0%</div><div class="ks">main sends ~23%</div><span class="pill dn">↓ 18.5%</span></div>
+  <div class="kpi"><div class="kl">Campaigns Sent</div><div class="kv" data-t="22">0</div><div class="ks">vs 19 in Feb</div><span class="pill up">↑ 15.8%</span></div>
+  <div class="kpi"><div class="kl">IG Followers</div><div class="kv" data-t="15097" data-c>0</div><div class="ks">Feb: 15,012 · +85</div><span class="pill up">↑ 0.6%</span></div>
+  <div class="kpi"><div class="kl">IG Posts + Reels</div><div class="kv" data-t="34">0</div><div class="ks">vs 9 in Feb</div><span class="pill up">↑ 278%</span></div>
+</div></div>
+
+<div class="page">
+
+<section id="overview">
+  <div class="sh"><span class="sh-ey">Overview</span><span class="sh-ti">March at a glance</span><span class="sh-r"></span></div>
+  <div class="g31">
+    <div class="card"><div class="cl">Email revenue by campaign — March 2026</div><div class="ch"><canvas id="cRev"></canvas></div></div>
+    <div class="card"><div class="cl">Feb vs March</div>
+      <table class="cmp"><thead><tr><th></th><th>March</th><th>Feb</th></tr></thead><tbody>
+        <tr><td>Campaigns</td><td class="cm">22</td><td class="cf">19</td></tr>
+        <tr><td>Total sends</td><td class="cm">344K</td><td class="cf">315K</td></tr>
+        <tr><td>Avg open rate</td><td class="cm">17.6%</td><td class="cf">21.6%</td></tr>
+        <tr><td>Total clicks</td><td class="cm">5,439</td><td class="cf">5,804</td></tr>
+        <tr><td>Unsubscribes</td><td class="cm">202</td><td class="cf">221</td></tr>
+        <tr><td>Revenue</td><td class="cm">$1,349</td><td class="cf">$1,395</td></tr>
+        <tr><td>Orders</td><td class="cm">14</td><td class="cf">5</td></tr>
+        <tr><td>Avg order value</td><td class="cm">$96</td><td class="cf">$279</td></tr>
+        <tr><td>IG posts + reels</td><td class="cm">34</td><td class="cf">9</td></tr>
+        <tr><td>IG followers</td><td class="cm">15,097</td><td class="cf">15,012</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
+<section id="email">
+  <div class="sh"><span class="sh-ey">Email · Flodesk</span><span class="sh-ti">Newsletter performance</span><span class="sh-r"></span></div>
+  <div class="note"><strong>Open rate note:</strong> The 17.6% overall average is pulled down by re-send emails — 3–4% is expected for re-sends. Main first-sends averaged <strong>~23%</strong>, above the industry average of 20–25%.</div>
+  <div class="card mb"><div class="cl">Top campaigns — click any card to view orders & email preview</div><div class="cg" id="campGrid"></div></div>
+  <div class="g2">
+    <div class="card"><div class="cl">Open rate — main sends · red line = 22% industry avg</div><div id="orMain"></div></div>
+    <div class="card"><div class="cl">Open rate — re-sends (expected 3–5%)</div><div id="orResend"></div></div>
+  </div>
+</section>
+
+<section id="instagram">
+  <div class="sh"><span class="sh-ey">Social · Instagram</span><span class="sh-ti">Content performance</span><span class="sh-r"></span></div>
+  <div class="note"><strong>Key insight:</strong> March volume was nearly 4× February (34 vs 9 posts) while engagement held steady — 336 vs 340. More content, same quality. Recipe content and Sunday Slowdowns consistently drive the highest per-post engagement rates.</div>
+  <div class="g2">
+    <div class="card"><div class="cl">Follower growth — Feb vs March</div><div class="chsm"><canvas id="cFol"></canvas></div></div>
+    <div class="card"><div class="cl">Avg engagement rate by content type</div><div class="chsm"><canvas id="cEng"></canvas></div></div>
+  </div>
+  <div class="card"><div class="cl">Top posts by engagement rate — click for details</div><div class="igg" id="igGrid"></div></div>
+</section>
+
+<section id="audience">
+  <div class="sh"><span class="sh-ey">Audience · Flodesk</span><span class="sh-ti">Mailing list segments</span><span class="sh-r"></span></div>
+  <div class="g13">
+    <div class="card"><div class="cl">List composition — 53,023 total</div><div class="chsm"><canvas id="cSeg"></canvas></div></div>
+    <div class="card"><div class="cl">Segment breakdown — April 6, 2026 snapshot</div><div id="segBars"></div></div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="sh"><span class="sh-ey">Raw Data</span><span class="sh-ti">All numbers</span><span class="sh-r"></span></div>
+  <button class="rt" onclick="toggleRaw('tSalesWrap',this)"><strong>Sales Attribution</strong> — 14 verified orders · Total $1,349.24<span class="cv">▾</span></button>
+  <div class="rb" id="tSalesWrap"><div style="overflow-x:auto"><table class="rbt" id="tS">
+    <thead><tr><th onclick="srt('tS',0)">Order ↕</th><th onclick="srt('tS',1)">Date ↕</th><th onclick="srt('tS',2)">Amount ↕</th><th>UTM</th><th>Campaign</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8821" target="_blank">#8821 ↗</a></td><td>Mar 2</td><td class="tg">$40.00</td><td class="tm">objects_of_affection_recipe_march2</td><td>Monthly Journal | March pr edit</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8831" target="_blank">#8831 ↗</a></td><td>Mar 3</td><td class="tg">$31.90</td><td class="tm">weekly_recipe_march_02</td><td>Weekly Recipe | Meyer Lemon Sweet Sformato</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8829" target="_blank">#8829 ↗</a></td><td>Mar 3</td><td class="tg">$103.95</td><td class="tm">weekly_recipe_wild_flower_march_02</td><td>Weekly Recipe | Meyer Lemon Sweet Sformato</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8863" target="_blank">#8863 ↗</a></td><td>Mar 5</td><td class="tg">$85.00</td><td class="tm">classes-february7</td><td>Classes &amp; Events: Pizza Making Class</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8931" target="_blank">#8931 ↗</a></td><td>Mar 10</td><td class="tg">$17.00</td><td class="tm">newsletter-pop-up-welcome</td><td>Newsletter sign-up pop up</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8948" target="_blank">#8948 ↗</a></td><td>Mar 11</td><td class="tg">$187.00</td><td class="tm">wildflower_and_meyer_lemon_March_11</td><td>Retail Global: Product Feature</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8939" target="_blank">#8939 ↗</a></td><td>Mar 11</td><td class="tg">$97.90</td><td class="tm">wildflower_and_meyer_lemon_March_11</td><td>Retail Global: Product Feature</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8938" target="_blank">#8938 ↗</a></td><td>Mar 11</td><td class="tg">$63.80</td><td class="tm">wildflower_and_meyer_lemon_March_11</td><td>Retail Global: Product Feature</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8964" target="_blank">#8964 ↗</a></td><td>Mar 12</td><td class="tg">$141.65</td><td class="tm">weekly_recipe_citrus_favorites_march_02</td><td>Weekly Recipe | Meyer Lemon (citrus re-send)</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/8951" target="_blank">#8951 ↗</a></td><td>Mar 12</td><td class="tg">$170.00</td><td class="tm">pizza_class_March_12</td><td>Classes &amp; Events: Pizza Making Class | Mar 12</td><td>Was missing — now reconciled</td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/9041" target="_blank">#9041 ↗</a></td><td>Mar 16</td><td class="tg">$202.30</td><td class="tm">vintage_vault_denim_levis_March_13</td><td>Vintage Vault: Denim</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/9043" target="_blank">#9043 ↗</a></td><td>Mar 17</td><td class="tg">$95.95</td><td class="tm">weekly_recipe_March_17</td><td>Weekly Recipe | Smoked Salmon Mascarpone Torta</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/9174" target="_blank">#9174 ↗</a></td><td>Mar 23</td><td class="tg">$45.00</td><td class="tm">objects_of_affection_journal_march2</td><td>Monthly Journal | March pr edit (re-send)</td><td></td></tr>
+      <tr><td><a class="tl" href="https://admin.shopify.com/store/bellacucinashop/orders/9185" target="_blank">#9185 ↗</a></td><td>Mar 24</td><td class="tg">$67.79</td><td class="tm">weekly_recipe_March_24</td><td>Weekly Recipe | Golden Hour Mocktail</td><td>Bella-15 discount · original $79.75</td></tr>
+    </tbody>
+  </table></div></div>
+
+  <button class="rt" onclick="toggleRaw('tPerfWrap',this)"><strong>Campaign Performance</strong> — all 22 campaigns<span class="cv">▾</span></button>
+  <div class="rb" id="tPerfWrap"><div style="overflow-x:auto"><table class="rbt" id="tP">
+    <thead><tr><th onclick="srt('tP',0)">Date ↕</th><th>Campaign</th><th onclick="srt('tP',2)">Sent ↕</th><th onclick="srt('tP',3)">Open% ↕</th><th onclick="srt('tP',4)">Clicks ↕</th><th>Unsubs</th><th onclick="srt('tP',6)">Revenue ↕</th><th>Orders</th></tr></thead>
+    <tbody>
+      <tr><td>Mar 2</td><td>Monthly Journal | March pr edit</td><td>22,230</td><td>22.6%</td><td>414</td><td>12</td><td class="tg">$40</td><td>1</td></tr>
+      <tr><td>Mar 2</td><td>Monthly Journal (re-send)</td><td>17,611</td><td>28.4%</td><td>414</td><td>12</td><td class="tg">$45</td><td>1</td></tr>
+      <tr><td>Mar 3</td><td>Weekly Recipe | Meyer Lemon Sweet Sformato</td><td>22,219</td><td>23.0%</td><td>317</td><td>14</td><td class="tg">$136</td><td>2</td></tr>
+      <tr><td>Mar 3</td><td>Weekly Recipe | Meyer Lemon (Wildflower send)</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="tg">$104</td><td>1</td></tr>
+      <tr><td>Mar 4</td><td>Weekly Recipe | Meyer Lemon (re-send)</td><td>17,720</td><td>3.9%</td><td>129</td><td>—</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 5</td><td>Classes &amp; Events: Pizza Making Class</td><td>13,017</td><td>23.7%</td><td>296</td><td>14</td><td class="tg">$85</td><td>1</td></tr>
+      <tr><td>Mar 5</td><td>Classes: Pizza Making Class (re-send)</td><td>13,005</td><td>22.9%</td><td>165</td><td>9</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 10</td><td>Weekly Recipe | Citrus Fennel Sea Bass</td><td>22,170</td><td>13.3%</td><td>121</td><td>2</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 10</td><td>Newsletter sign-up pop up</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="tg">$17</td><td>1</td></tr>
+      <tr><td>Mar 11</td><td>Retail Global: Product Feature</td><td>22,161</td><td>23.2%</td><td>394</td><td>13</td><td class="tg">$349</td><td>3</td></tr>
+      <tr><td>Mar 12</td><td>Retail Global: Product Feature (re-send)</td><td>17,542</td><td>3.4%</td><td>54</td><td>—</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 12</td><td>Weekly Recipe | Meyer Lemon (citrus re-send)</td><td>—</td><td>—</td><td>394</td><td>—</td><td class="tg">$142</td><td>1</td></tr>
+      <tr><td>Mar 12</td><td>Classes &amp; Events: Pizza Making Class | Mar 12</td><td>13,708</td><td>25.3%</td><td>322</td><td>7</td><td class="tg">$170</td><td>1</td></tr>
+      <tr><td>Mar 13</td><td>Vintage Vault: Denim</td><td>22,138</td><td>22.9%</td><td>280</td><td>15</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 16</td><td>Vintage Vault: Denim (re-send)</td><td>17,446</td><td>2.9%</td><td>47</td><td>—</td><td class="tg">$202</td><td>1</td></tr>
+      <tr><td>Mar 17</td><td>Weekly Recipe | Smoked Salmon Mascarpone Torta</td><td>22,105</td><td>23.0%</td><td>320</td><td>13</td><td class="tg">$96</td><td>1</td></tr>
+      <tr><td>Mar 18</td><td>Weekly Recipe | Salmon Torta (re-send)</td><td>17,639</td><td>4.1%</td><td>207</td><td>13</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 19</td><td>Classes &amp; Events: Pizza Making Class (Mar 19)</td><td>22,139</td><td>20.3%</td><td>392</td><td>17</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 20</td><td>Vintage Vault: Antiques &amp; Objects</td><td>22,067</td><td>23.3%</td><td>485</td><td>14</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 22</td><td>Antiques &amp; Found Objects (re-send)</td><td>17,409</td><td>3.3%</td><td>90</td><td>13</td><td class="tm">$0</td><td>0</td></tr>
+      <tr><td>Mar 24</td><td>Weekly Recipe | Golden Hour Mocktail</td><td>22,044</td><td>20.7%</td><td>306</td><td>13</td><td class="tg">$68</td><td>1</td></tr>
+      <tr><td>Mar 31</td><td>Weekly Recipe | Preserved Lemon Cream Cake</td><td>22,034</td><td>20.2%</td><td>290</td><td>8</td><td class="tm">$0</td><td>0</td></tr>
+    </tbody>
+  </table></div></div>
+</section>
+</div>
+
+<!-- MODAL -->
+<div class="ov" id="ov" onclick="cmo(event)">
+  <div class="mo" id="mo">
+    <div class="mh"><div class="mt" id="mTi"></div><div class="ms" id="mSu"></div><button class="mcl" onclick="cmo()">✕</button></div>
+    <div class="mb2"><div class="mk" id="mK"></div><div class="msect" id="mOr"></div><div class="msect" id="mIn"></div><div class="mac" id="mAc"></div></div>
+  </div>
+</div>
+
+<footer>Bella Cucina · Digital Report · <span>March 2026</span> · Paola</footer>
+
+<script>
+const SH='https://admin.shopify.com/store/bellacucinashop/orders/';
+const camps=[
+  {name:'Retail Global: Product Feature',date:'Mar 11',rev:348.70,orders:3,pct:100,or:'23.2%',clicks:394,sent:'22,161',email:'https://view.flodesk.com/emails/69a86c8d90e39b6e1fb3cf3f',ol:[{id:'8948',amt:'$187.00',em:'cbmcennis@gmail.com'},{id:'8939',amt:'$97.90',em:'jas5100@mac.com'},{id:'8938',amt:'$63.80',em:'mosuga@gmail.com'}],ins:'Best-performing campaign of the month. Meyer Lemon Spread + Wildflower Aromatic Sugar drove 3 orders in one day — strong product-email fit.'},
+  {name:'Vintage Vault: Denim',date:'Mar 13',rev:202.30,orders:1,pct:58,or:'22.9%',clicks:280,sent:'22,138',email:'https://view.flodesk.com/emails/69b1b991f5a996443e55cb84',ol:[{id:'9041',amt:'$202.30',em:'oonaghpalmore@icloud.com'}],ins:'Strong open rate on main send. The $202.30 sale came via the re-send UTM — showing the two-send strategy is working.'},
+  {name:'Classes: Pizza Making Class | Mar 12',date:'Mar 12',rev:170.00,orders:1,pct:49,or:'25.3%',clicks:322,sent:'13,708',email:'https://view.flodesk.com/emails/69b1e369f7ced667c064ad77',ol:[{id:'8951',amt:'$170.00',em:'kmooneyatl@me.com'}],ins:'Highest open rate of all class emails (25.3%). This order was initially missing from the tracker — now fully reconciled.'},
+  {name:'Weekly Recipe: Meyer Lemon (all sends)',date:'Mar 3 + Mar 12',rev:277.50,orders:3,pct:80,or:'23.0%',clicks:317,sent:'22,219',email:'https://view.flodesk.com/emails/69a076fe8cfc7b2c874034f1',ol:[{id:'8831',amt:'$31.90',em:'pkmayeux@me.com'},{id:'8829',amt:'$103.95',em:'linda.clgn@gmail.com'},{id:'8964',amt:'$141.65',em:'roebrian78@verizon.net'}],ins:'$277.50 across 3 orders from multiple sends. The citrus re-send on Mar 12 drove the largest single order ($141.65) — recipe content converts across time.'},
+  {name:'Weekly Recipe: Smoked Salmon Torta',date:'Mar 17',rev:95.95,orders:1,pct:28,or:'23.0%',clicks:320,sent:'22,105',email:'https://view.flodesk.com/emails/69b1d449d5139500626714c5',ol:[{id:'9043',amt:'$95.95',em:'ness2@comcast.net'}],ins:'Spring recipe content converting consistently. 23% open rate, on par with all main recipe sends this month.'},
+  {name:'Monthly Journal | March pr edit',date:'Mar 2 + re-send',rev:85.00,orders:2,pct:24,or:'22.6% / 28.4%',clicks:414,sent:'22,230',email:'https://view.flodesk.com/emails/699f5d026d3aa19524b10096',ol:[{id:'8821',amt:'$40.00',em:'maria.penna.cunha@gmail.com'},{id:'9174',amt:'$45.00',em:'jackie@jackieblackwell.com'}],ins:'Two orders across two sends — the re-send converted 3 weeks later (Mar 23), showing the journal has a long tail of engagement.'},
+  {name:'Classes: Pizza Making Class (Mar 5)',date:'Mar 5',rev:85.00,orders:1,pct:24,or:'23.7%',clicks:296,sent:'13,017',email:'https://view.flodesk.com/emails/69a89bbf6878592d6470eb12',ol:[{id:'8863',amt:'$85.00',em:'ursulatate@hotmail.com'}],ins:'First pizza class invite. 23.7% open rate. Class eventually sold out. The Mar 12 email also drove a separate $170 order — same event, two revenue touchpoints.'},
+];
+const igP=[
+  {er:'16%',type:'Image',cap:'Poppies at the farmers market — a bit of beauty',date:'Mar 30',reach:140,eng:22,likes:18},
+  {er:'11%',type:'Carousel',cap:'PRIMAVERA | at Bella Cucina — March Journal launch',date:'Mar 2',reach:162,eng:20,likes:16},
+  {er:'9.3%',type:'Reel',cap:'Inside the Bella Cucina Store x Studio',date:'Mar 6',reach:418,eng:35,likes:27},
+  {er:'9.0%',type:'Image',cap:'Sunday Slowdown — Marfa, talismans & what we carry',date:'Mar 15',reach:333,eng:30,likes:22},
+  {er:'8.7%',type:'Image',cap:'Sunday Slowdown — emptiness exists in small things',date:'Mar 29',reach:126,eng:11,likes:11},
+  {er:'8.7%',type:'Image',cap:'Sunday Slowdown — time as sacred currency',date:'Mar 1',reach:321,eng:28,likes:26},
+  {er:'7.9%',type:'Carousel',cap:'March in Italy — Citrus Fennel Sea Bass recipe',date:'Mar 11',reach:229,eng:18,likes:12},
+  {er:'6.9%',type:'Carousel',cap:"Bella's Weekly Recipe | Smoked Salmon Mascarpone Torta",date:'Mar 17',reach:231,eng:16,likes:9},
+];
+
+// Campaign cards
+const cg=document.getElementById('campGrid');
+camps.forEach((c,i)=>{
+  const d=document.createElement('div');d.className='cc';
+  d.innerHTML=`<div class="cc-r">$${c.rev.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}</div><div class="cc-n">${c.name}</div><div class="cc-m">${c.date} · ${c.orders} order${c.orders>1?'s':''} · ${c.or} open</div><div class="cc-b"><div class="cc-f" style="width:${c.pct}%"></div></div>`;
+  d.onclick=()=>opM(i);cg.appendChild(d);
+});
+
+// IG cards
+const ig=document.getElementById('igGrid');
+igP.forEach((p,i)=>{
+  const d=document.createElement('div');d.className='igc';
+  d.innerHTML=`<div class="ig-er">${p.er}</div><div class="ig-ty">${p.type} · ${p.date}</div><div class="ig-cp">${p.cap}</div><div class="ig-re">${p.reach} reach · ${p.eng} eng</div>`;
+  d.onclick=()=>opIG(i);ig.appendChild(d);
+});
+
+// Open rate bars
+function mkOR(data,elId,max,showAvg){
+  const el=document.getElementById(elId);
+  data.forEach(d=>{
+    const w=(d.p/max*100).toFixed(1);
+    const ap=showAvg?(22/max*100).toFixed(1):null;
+    el.innerHTML+=`<div class="orr${d.dim?' dim':''}"><div class="orl">${d.l}</div><div class="ort"><div class="orf" style="width:0%;background:${d.c||'#aaa'}" data-w="${w}"></div>${showAvg?`<div class="ora" style="left:${ap}%"></div>`:''}</div><div class="orv">${d.p}%</div></div>`;
+  });
+  setTimeout(()=>{el.querySelectorAll('.orf').forEach(b=>b.style.width=b.dataset.w+'%')},100);
+}
+mkOR([
+  {l:'Classes: Pizza Class | Mar 12',p:25.3,c:'var(--olive)'},{l:'Classes: Pizza Class | Mar 5',p:23.7,c:'var(--olive)'},
+  {l:'Vintage Vault: Antiques & Objects',p:23.3,c:'var(--olive)'},{l:'Retail Global: Product Feature',p:23.2,c:'var(--olive)'},
+  {l:'Weekly Recipe: Salmon Torta',p:23.0,c:'var(--olive)'},{l:'Weekly Recipe: Meyer Lemon',p:23.0,c:'var(--olive)'},
+  {l:'Vintage Vault: Denim',p:22.9,c:'var(--olive)'},{l:'Classes: Pizza Class (re-send*)',p:22.9,c:'var(--olive-m)'},
+  {l:'Monthly Journal re-send*',p:28.4,c:'var(--sage)'},{l:'Monthly Journal main',p:22.6,c:'var(--olive)'},
+  {l:'Golden Hour Mocktail',p:20.7,c:'var(--olive)'},{l:'Pizza Class Mar 19',p:20.3,c:'var(--olive)'},
+  {l:'Preserved Lemon Cream Cake',p:20.2,c:'var(--olive)'},{l:'Citrus Fennel Sea Bass',p:13.3,c:'var(--gold)'},
+],'orMain',32,true);
+mkOR([
+  {l:'Salmon Torta (re-send)',p:4.1,c:'#bbb',dim:true},{l:'Meyer Lemon (re-send)',p:3.9,c:'#bbb',dim:true},
+  {l:'Antiques & Objects (re-send)',p:3.3,c:'#bbb',dim:true},{l:'Product Feature (re-send)',p:3.4,c:'#bbb',dim:true},
+  {l:'Vintage Vault Denim (re-send)',p:2.9,c:'#bbb',dim:true},
+],'orResend',8,false);
+
+// Segment bars
+const segs=[
+  {l:'Cold: 365+ days',v:38863,mx:38863,c:'#C8C4BC',tag:'73% of list'},
+  {l:'Active Engaged/Non-Buyers: 30–60 Days',v:13823,mx:38863,c:'var(--olive)',tag:'Core active'},
+  {l:'Pref: Recipes + Inspiration',v:3208,mx:38863,c:'var(--terra)'},
+  {l:'Active Buyers: 90 Days',v:1525,mx:38863,c:'var(--sage)',tag:'Highest value'},
+  {l:'Pref: Exclusive Offers + New Arrivals',v:1230,mx:38863,c:'var(--terra)'},
+  {l:'New Subscribers: 0–30 Days',v:1144,mx:38863,c:'var(--gold)'},
+  {l:'Lapsed Buyers: 90–365 Days',v:989,mx:38863,c:'var(--terra)',tag:'Win-back opportunity'},
+  {l:'High-Value Buyers',v:620,mx:38863,c:'var(--olive-m)'},
+  {l:'Pref: Classes & Events',v:386,mx:38863,c:'var(--terra)'},
+];
+const sb=document.getElementById('segBars');
+segs.forEach(s=>{
+  const w=(s.v/s.mx*100).toFixed(1);
+  sb.innerHTML+=`<div class="sr"><div class="sl">${s.l}${s.tag?` <span style="font-size:9px;color:var(--muted)">· ${s.tag}</span>`:''}</div><div class="st"><div class="sf" style="width:0%;background:${s.c}" data-w="${w}"></div></div><div class="sv">${s.v.toLocaleString()}</div></div>`;
+});
+setTimeout(()=>{document.querySelectorAll('.sf').forEach(b=>b.style.width=b.dataset.w+'%')},200);
+
+// Charts
+const cd={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
+new Chart(document.getElementById('cRev'),{type:'bar',data:{labels:['Product Feature','Vintage Vault: Denim','Meyer Lemon (all)','Pizza Class Mar 12','Salmon Torta','Monthly Journal','Pizza Class Mar 5'],datasets:[{data:[348.70,202.30,277.50,170.00,95.95,85.00,85.00],backgroundColor:['#3E4F22','#6B7A40','#3E4F22','#9A7020','#4A6E48','#4A6E48','#4A6E48'],borderRadius:4}]},options:{...cd,indexAxis:'y',scales:{x:{ticks:{callback:v=>'$'+v,font:{family:'DM Sans',size:10}},grid:{color:'rgba(0,0,0,.04)'}},y:{ticks:{font:{family:'DM Sans',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.raw.toFixed(2)}}}}});
+new Chart(document.getElementById('cFol'),{type:'line',data:{labels:['Wk 1','Wk 2','Wk 3','Wk 4'],datasets:[{label:'March',data:[15030,15038,15055,15097],borderColor:'#3E4F22',backgroundColor:'rgba(62,79,34,.08)',tension:.4,pointRadius:3,pointBackgroundColor:'#3E4F22',fill:true},{label:'February',data:[14901,14913,14930,15012],borderColor:'#8C8C88',backgroundColor:'transparent',tension:.4,pointRadius:3,pointBackgroundColor:'#8C8C88',borderDash:[4,4]}]},options:{...cd,plugins:{legend:{display:true,labels:{font:{family:'DM Sans',size:10},usePointStyle:true,boxWidth:8}},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw.toLocaleString()}`}}},scales:{y:{ticks:{font:{family:'DM Sans',size:10}},grid:{color:'rgba(0,0,0,.04)'}},x:{ticks:{font:{family:'DM Sans',size:10}}}}}});
+new Chart(document.getElementById('cEng'),{type:'bar',data:{labels:['Images','Carousels','Reels'],datasets:[{data:[8.2,6.5,4.3],backgroundColor:['#3E4F22','#6B7A40','#9A7020'],borderRadius:5}]},options:{...cd,scales:{y:{ticks:{callback:v=>v+'%',font:{family:'DM Sans',size:10}},grid:{color:'rgba(0,0,0,.04)'}},x:{ticks:{font:{family:'DM Sans',size:10}}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw}% avg eng. rate`}}}}});
+new Chart(document.getElementById('cSeg'),{type:'doughnut',data:{labels:['Cold 365+','Active Engaged','Active Buyers','New Subscribers','Lapsed Buyers'],datasets:[{data:[38863,13823,1525,1144,989],backgroundColor:['#C8C4BC','#3E4F22','#4A6E48','#9A7020','#A04028'],borderWidth:2,borderColor:'#FDFCFA'}]},options:{...cd,cutout:'62%',plugins:{legend:{display:true,position:'bottom',labels:{font:{family:'DM Sans',size:10},usePointStyle:true,boxWidth:8,padding:8}}}}});
+
+// KPI animation
+document.querySelectorAll('.kv[data-t]').forEach(el=>{
+  const tgt=parseFloat(el.dataset.t),pre=el.dataset.p||'',suf=el.dataset.s||'',cm=el.hasAttribute('data-c'),fl=String(tgt).includes('.');
+  const dur=1200,st=performance.now();
+  function tick(now){const p=Math.min((now-st)/dur,1),e=1-Math.pow(1-p,3),v=tgt*e;el.textContent=pre+(fl?v.toFixed(1):cm?Math.round(v).toLocaleString():Math.round(v))+suf;if(p<1)requestAnimationFrame(tick);}
+  requestAnimationFrame(tick);
+});
+
+// Modal
+function opM(i){
+  const c=camps[i];
+  document.getElementById('mTi').textContent=c.name;
+  document.getElementById('mSu').textContent=`${c.date} · ${c.sent} sent · ${c.or} open rate · ${c.clicks} clicks`;
+  document.getElementById('mK').innerHTML=`<div class="mkp"><div class="mkv">$${c.rev.toFixed(2)}</div><div class="mkl">Revenue</div></div><div class="mkp"><div class="mkv">${c.orders}</div><div class="mkl">Orders</div></div><div class="mkp"><div class="mkv">${c.or}</div><div class="mkl">Open rate</div></div><div class="mkp"><div class="mkv">${c.clicks}</div><div class="mkl">Clicks</div></div>`;
+  document.getElementById('mOr').innerHTML=`<div class="msect-t">Orders attributed to this campaign</div>`+c.ol.map(o=>`<div class="or"><a class="oid" href="${SH}${o.id}" target="_blank">#${o.id} ↗</a><span style="font-size:11px;color:var(--muted)">${o.em}</span><span class="oam">${o.amt}</span></div>`).join('');
+  document.getElementById('mIn').innerHTML=`<div class="msect-t">Insight</div><div style="font-size:12px;color:var(--ink2);line-height:1.7">${c.ins}</div>`;
+  document.getElementById('mAc').innerHTML=`<a class="btn bp" href="${c.email}" target="_blank">View email preview ↗</a><a class="btn bg2" href="${SH}" target="_blank">Shopify orders ↗</a>`;
+  document.getElementById('ov').classList.add('open');document.body.style.overflow='hidden';
+}
+function opIG(i){
+  const p=igP[i];
+  document.getElementById('mTi').textContent=p.cap;
+  document.getElementById('mSu').textContent=`${p.type} · ${p.date}`;
+  document.getElementById('mK').innerHTML=`<div class="mkp"><div class="mkv">${p.er}</div><div class="mkl">Eng. rate</div></div><div class="mkp"><div class="mkv">${p.eng}</div><div class="mkl">Engagements</div></div><div class="mkp"><div class="mkv">${p.reach}</div><div class="mkl">Reach</div></div><div class="mkp"><div class="mkv">${p.likes}</div><div class="mkl">Likes</div></div>`;
+  document.getElementById('mOr').innerHTML='';document.getElementById('mIn').innerHTML='';
+  document.getElementById('mAc').innerHTML=`<button class="btn bn" onclick="cmo()">Close</button>`;
+  document.getElementById('ov').classList.add('open');document.body.style.overflow='hidden';
+}
+function cmo(e){if(e&&e.target!==document.getElementById('ov'))return;document.getElementById('ov').classList.remove('open');document.body.style.overflow='';}
+
+// Raw toggle
+function toggleRaw(id,btn){document.getElementById(id).classList.toggle('open');btn.classList.toggle('open');}
+
+// Sort tables
+function srt(id,col){
+  const t=document.getElementById(id),b=t.querySelector('tbody'),rows=[...b.rows];
+  const asc=t.dataset.sc==col&&t.dataset.sd=='a';t.dataset.sc=col;t.dataset.sd=asc?'d':'a';
+  rows.sort((a,b2)=>{const av=a.cells[col]?.innerText.replace(/[$,%↗K,]/g,'').trim()||'',bv=b2.cells[col]?.innerText.replace(/[$,%↗K,]/g,'').trim()||'',an=parseFloat(av),bn=parseFloat(bv);if(!isNaN(an)&&!isNaN(bn))return asc?bn-an:an-bn;return asc?bv.localeCompare(av):av.localeCompare(bv);});
+  rows.forEach(r=>b.appendChild(r));
+}
+
+// Nav highlight
+const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.nav a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.id;});links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+c));},{passive:true});
+</script>
+</body>
+</html>
